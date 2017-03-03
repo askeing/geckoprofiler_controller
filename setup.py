@@ -5,7 +5,7 @@ import os
 from setuptools import setup, find_packages
 
 VERSION = '0.0.1'
-CURRENT_PATH = os.path.dirname(__file__)
+CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # dependencies
 DEFAULT_REQUIREMENT_DOC = os.path.join(CURRENT_PATH, 'requirements.txt')
@@ -29,7 +29,7 @@ long_description = readme + '\n\n' + history
 
 # main setup script
 setup(
-    name='gecko-profiler-controller',
+    name='geckoprofiler_controller',
     version=VERSION,
     description='Control the Gecko Profiler by Python and Web Socket',
     long_description=long_description,
