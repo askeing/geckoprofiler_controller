@@ -16,7 +16,6 @@ import commands
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-server = None
 addon_clients = []
 py_clients = []
 
@@ -68,7 +67,7 @@ class PythonSocketHandler(websocket.WebSocketHandler):
                 client.close()
             for client in py_clients:
                 client.close()
-            thread.start_new_thread(stop_server, (server,))
+            thread.start_new_thread(stop_server, ())
             logger.info('[WebSocket] Server stopped!')
             return
         # Command: ping-addon
@@ -99,8 +98,23 @@ app = web.Application([
 ])
 
 
-def stop_server(server_handler):
-    server_handler.stop()
+def stop_server():
+    try:
+        logger.info('[WS IOLoop] Stopping Server ...')
+        ws_server = ioloop.IOLoop.current()
+        ws_server.stop()
+        ws_server.close()
+        logger.info('[WS IOLoop] Server stopped!')
+    except:
+        pass
+
+
+def start_server():
+    app.listen(8888)
+    logger.info('[WebSocket] Server is listening on port 8888 ...')
+    ws_server = ioloop.IOLoop.instance()
+    thread.start_new_thread(ws_server.start, ())
+    return ws_server
 
 
 if __name__ == '__main__':

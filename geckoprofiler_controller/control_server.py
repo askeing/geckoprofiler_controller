@@ -6,6 +6,7 @@ The Gecko-Profiler Add-on will wait for commands from this server, while the com
 
 import os
 import logging
+from geckoprofiler_controller.server import websocket_server
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -15,15 +16,15 @@ CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 class ServerController:
     def __init__(self):
-        self.p = None
+        self.ws_server = None
         self.command = os.path.join(CURRENT_PATH, 'server', 'websocket-server.py')
 
     def start_server(self):
         logger.info('Starting Web Socket server ...')
-        import subprocess
-        self.p = subprocess.Popen(self.command)
+        self.ws_server = websocket_server.start_server()
         logger.info('Web Socket server started.')
 
     def stop_server(self):
-        self.p.kill()
+        self.ws_server.stop()
+        self.ws_server.close()
         logger.info('Server stopped.')

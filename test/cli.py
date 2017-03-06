@@ -1,10 +1,14 @@
 from geckoprofiler_controller.control_client import *
 from geckoprofiler_controller.control_server import *
 
+from test.mock_addon import MockAddon
+
 logging.basicConfig(level=logging.DEBUG)
 
 
 if __name__ == '__main__':
+    #mockaddon = MockAddon()
+
     try:
         CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -13,6 +17,9 @@ if __name__ == '__main__':
         my_server.start_server()
 
         time.sleep(5)
+
+        # starting mock Add-on
+        #mockaddon.start_addon()
 
         # Starting client ...
         my_client = ControllerClient(my_server, save_path=CURRENT_PATH)
@@ -36,4 +43,4 @@ if __name__ == '__main__':
 
     finally:
         print('stop server.')
-        my_client.stop_server()
+        #mockaddon.stop_addon()

@@ -82,7 +82,6 @@ class ControllerClient:
         self.control_server.stop_server()
 
     def disconnect(self):
-        self.stop_server()
         logger.info('Stopping Web Socket server ...')
         data = {
             commands.KEY_NAME: commands.VALUE_STOP,
