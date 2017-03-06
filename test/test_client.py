@@ -22,17 +22,18 @@ class MyTestCase(unittest.TestCase):
         self.mockaddon.start_addon()
 
         # create Python client
-        self.my_client = ControllerClient(self.my_server, save_path=self.CURRENT_PATH)
+        self.my_client = ControllerClient(control_server=self.my_server, save_path=self.CURRENT_PATH)
         # Python client connect to server
         self.my_client.connect()
 
-    def test_client(self):
+    def test_client_file(self):
         # Opening profiling page ...
         self.my_client.open_profiling_page()
         # Getting profiling file ...
         filepath = self.my_client.get_profiling_file()
         self.assertEqual(filepath, os.path.join(self.CURRENT_PATH, 'FirefoxProfile.json.gz'))
 
+    def test_client_link(self):
         # Opening profiling page ...
         self.my_client.open_profiling_page()
         # Getting profiling link ...
@@ -44,8 +45,9 @@ class MyTestCase(unittest.TestCase):
         self.mockaddon.stop_addon()
 
         # Close server and disconnect
+        self.my_client.send_stop_server_command()
         self.my_client.disconnect()
-        time.sleep(5)
+        time.sleep(1)
 
 
 if __name__ == '__main__':

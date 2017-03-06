@@ -26,7 +26,7 @@ ONE_HOUR = 60 * 60
 
 class ControllerClient:
 
-    def __init__(self, control_server, save_path=None):
+    def __init__(self, control_server=None, save_path=None):
         self.hostname = 'ws://localhost:8888/py'
         self.control_server = control_server
         self.is_online = False
@@ -78,10 +78,16 @@ class ControllerClient:
             # offline if there is no add-on
             self.is_online = False
 
-    def stop_server(self):
-        self.control_server.stop_server()
-
     def disconnect(self):
+        self.ws_conn.close()
+
+    def _force_stop_server(self):
+        if self.control_server:
+            self.control_server.stop_server()
+        else:
+            logger.warn('Cannot force stop Web Socket server.')
+
+    def send_stop_server_command(self):
         logger.info('Stopping Web Socket server ...')
         data = {
             commands.KEY_NAME: commands.VALUE_STOP,

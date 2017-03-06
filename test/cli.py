@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 if __name__ == '__main__':
-    #mockaddon = MockAddon()
+    # mockaddon = MockAddon()
 
     try:
         CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -19,10 +19,10 @@ if __name__ == '__main__':
         time.sleep(5)
 
         # starting mock Add-on
-        #mockaddon.start_addon()
+        # mockaddon.start_addon()
 
         # Starting client ...
-        my_client = ControllerClient(my_server, save_path=CURRENT_PATH)
+        my_client = ControllerClient(control_server=my_server, save_path=CURRENT_PATH)
         my_client.connect()
 
         # Opening profiling page ...
@@ -35,12 +35,12 @@ if __name__ == '__main__':
         # Getting profiling link ...
         link = my_client.get_profiling_link()
 
-        # Close server and disconnect
-        my_client.disconnect()
-
         print('file path: ' + filepath)
         print('link: ' + link)
 
     finally:
+        # mockaddon.stop_addon()
+        # Close server and disconnect
+        my_client.send_stop_server_command()
+        my_client.disconnect()
         print('stop server.')
-        #mockaddon.stop_addon()

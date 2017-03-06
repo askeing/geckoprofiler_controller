@@ -5,6 +5,7 @@ for listening the connections from Gecko-Profiler Add-on and Python client.
 The Gecko-Profiler Add-on will wait for commands from this server, while the commands come from Python client.
 """
 
+import os
 import json
 import thread
 import logging
@@ -103,7 +104,6 @@ def stop_server():
         logger.info('[WS IOLoop] Stopping Server ...')
         ws_server = ioloop.IOLoop.current()
         ws_server.stop()
-        ws_server.close()
         logger.info('[WS IOLoop] Server stopped!')
     except:
         pass
@@ -118,7 +118,10 @@ def start_server():
 
 
 if __name__ == '__main__':
-    app.listen(8888)
-    logger.info('[WebSocket] Server is listening on port 8888 ...')
-    server = ioloop.IOLoop.instance()
-    server.start()
+    try:
+        app.listen(8888)
+        logger.info('[WebSocket] Server is listening on port 8888 ...')
+        server = ioloop.IOLoop.instance()
+        server.start()
+    except:
+        server.close()
