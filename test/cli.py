@@ -1,7 +1,7 @@
-import time
-
 from geckoprofiler_controller.control_client import *
 from geckoprofiler_controller.control_server import *
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 if __name__ == '__main__':
@@ -19,6 +19,7 @@ if __name__ == '__main__':
         my_client.connect()
 
         # Opening profiling page ...
+        my_client.open_profiling_page()
         my_client.open_profiling_page()
 
         # Getting profiling file ...

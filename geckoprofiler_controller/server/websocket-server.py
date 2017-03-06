@@ -60,8 +60,8 @@ class PythonSocketHandler(websocket.WebSocketHandler):
 
     def on_message(self, message):
         input_data = json.loads(message)
-        logger.info('[WebSocket] PythonSocketHandler get: {}'.format(input_data))
 
+        # Command: close-server
         if input_data.get(commands.KEY_NAME, '').lower() == commands.VALUE_STOP:
             logger.info('[WebSocket] Stopping Server ...')
             for client in addon_clients:
@@ -71,7 +71,23 @@ class PythonSocketHandler(websocket.WebSocketHandler):
             thread.start_new_thread(stop_server, (server,))
             logger.info('[WebSocket] Server stopped!')
             return
+        # Command: ping-addon
+        elif input_data.get(commands.KEY_NAME, '').lower() == commands.VALUE_PING_ADDON:
+            if len(addon_clients) > 0:
+                data = {
+                    commands.KEY_NAME: commands.REPLY_STAT_SUCCESS,
+                    commands.KEY_DATA: ''
+                }
+                self.write_message(json.dumps(data))
+            else:
+                data = {
+                    commands.KEY_NAME: commands.REPLY_STAT_FAIL,
+                    commands.KEY_DATA: ''
+                }
+                self.write_message(json.dumps(data))
+            return
 
+        logger.info('[WebSocket] PythonSocketHandler get: {}'.format(input_data))
         if commands.KEY_NAME in input_data \
                 and commands.KEY_DATA in input_data:
             for client in addon_clients:
