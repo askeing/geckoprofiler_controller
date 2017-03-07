@@ -44,8 +44,8 @@ if __name__ == '__main__':
         # Getting profiling link ...
         link = my_client.get_profiling_link()
 
-        print('>> Profiling File: ' + filepath)
-        print('>> Profiling Link: ' + link)
+        print('>> Profiling File: {}'.format(filepath))
+        print('>> Profiling Link: {}'.format(link))
     finally:
         # mockaddon.stop_addon()
 
