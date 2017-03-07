@@ -1,8 +1,8 @@
 gecko-profiler-controller
 =========================
 
-.. image:: https://travis-ci.org/askeing/geckoprofiler-controller.svg?branch=master
-    :target: https://travis-ci.org/askeing/geckoprofiler-controller
+.. image:: https://travis-ci.org/askeing/geckoprofiler_controller.svg?branch=master
+    :target: https://travis-ci.org/askeing/geckoprofiler_controller
 
 Control the **Gecko Profiler** by Python and Web Socket.
 
