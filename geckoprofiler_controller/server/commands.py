@@ -1,3 +1,7 @@
+"""
+List all commands and keywords for communications.
+"""
+
 KEY_NAME = 'command'
 KEY_DATA = 'data'
 

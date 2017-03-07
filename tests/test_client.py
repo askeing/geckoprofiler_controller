@@ -1,6 +1,6 @@
 import unittest
 
-from test.mock_addon import MockAddon
+from tests.mock_addon import MockAddon
 from geckoprofiler_controller.control_client import *
 from geckoprofiler_controller.control_server import *
 

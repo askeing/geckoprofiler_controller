@@ -1,7 +1,7 @@
 from geckoprofiler_controller.control_client import *
 from geckoprofiler_controller.control_server import *
 
-from test.mock_addon import MockAddon
+from tests.mock_addon import MockAddon
 
 logging.basicConfig(level=logging.DEBUG)
 
