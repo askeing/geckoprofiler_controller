@@ -13,10 +13,19 @@ if __name__ == '__main__':
         CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
         # Starting server ...
+        print('Starting Web Socket server ...')
         my_server = ServerController()
         my_server.start_server()
-
         time.sleep(5)
+        print('Web Socket server started.')
+
+        # wait for user actions on Firefox
+        print('\n\n'
+              '############################################################\n'
+              '# Now you can launch Firefox with Gecko-Profiler (Hasal),  #\n'
+              '# and then access web sites.                               #\n'
+              '############################################################')
+        raw_input('>> Press Enter will start profiling ... <<\n\n')
 
         # starting mock Add-on
         # mockaddon.start_addon()
@@ -35,11 +44,11 @@ if __name__ == '__main__':
         # Getting profiling link ...
         link = my_client.get_profiling_link()
 
-        print('file path: ' + filepath)
-        print('link: ' + link)
-
+        print('>> Profiling File: ' + filepath)
+        print('>> Profiling Link: ' + link)
     finally:
         # mockaddon.stop_addon()
+
         # Close server and disconnect
         my_client.send_stop_server_command()
         my_client.disconnect()
