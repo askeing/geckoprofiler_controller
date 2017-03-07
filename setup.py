@@ -35,7 +35,7 @@ setup(
     long_description=long_description,
     author='Askeing Yen',
     author_email='askeing@gmail.com',
-    url='https://github.com/askeing/gecko-profiler-controller',
+    url='https://github.com/askeing/geckoprofiler_controller',
     keywords='mozilla firefox gecko profiler utilities ',
     license='MPL',
     install_requires=deps,
