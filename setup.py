@@ -4,13 +4,18 @@
 import os
 from setuptools import setup, find_packages
 
-VERSION = '0.0.1'
+VERSION = '0.0.2'
 CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # dependencies
-DEFAULT_REQUIREMENT_DOC = os.path.join(CURRENT_PATH, 'requirements.txt')
-with open(DEFAULT_REQUIREMENT_DOC) as f:
-    deps = f.read().splitlines()
+try:
+    with open('requirements.txt') as f:
+        deps = f.read().splitlines()
+except:
+    deps = [
+        'tornado==4.4.2',
+        'websocket-client==0.40.0'
+    ]
 
 # get documentation from the README and HISTORY
 try:
