@@ -38,6 +38,8 @@ class ControllerClient:
             self.save_path = save_path
         else:
             self.save_path = CURRENT_PATH
+        if not save_path.endswith(os.sep):
+            self.save_path += os.sep
 
     def set_retry_time(self, retry_time):
         if isinstance(retry_time, int) and 0 < retry_time <= 100:
