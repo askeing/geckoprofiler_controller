@@ -153,6 +153,25 @@ class ControllerClient:
         else:
             logger.error('Profiling Data is not ready.')
 
+    def wait_profiling_link_sharing_finish(self):
+        # wait 1 min for sharing link finish
+        self.ws_conn.settimeout(ONE_MINUTE)
+        logger.info('Waiting for sharing finish ...')
+        data = {
+            commands.KEY_NAME: commands.VALUE_WAIT_LINK_FINISH,
+            commands.KEY_DATA: ''
+        }
+        if self.profile_ready:
+            for _ in range(self.retry_time):
+                ret_code, ret_msg = self._send_and_recv(data)
+                if ret_code == commands.REPLY_STAT_SUCCESS:
+                    return True
+                logger.debug('retry ...')
+            logger.error('Waiting for sharing finish timeout.')
+        else:
+            logger.error('Profiling Data is not ready.')
+        return False
+
     def _send_and_recv(self, data):
         self._send(data)
         return self._recv()

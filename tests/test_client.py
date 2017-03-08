@@ -32,6 +32,7 @@ class MyTestCase(unittest.TestCase):
         # Getting profiling file ...
         filepath = self.my_client.get_profiling_file()
         self.assertEqual(filepath, os.path.join(self.CURRENT_PATH, 'FirefoxProfile.json.gz'))
+        self.mockaddon.reset_addon()
 
     def test_client_link(self):
         # Opening profiling page ...
@@ -39,6 +40,22 @@ class MyTestCase(unittest.TestCase):
         # Getting profiling link ...
         link = self.my_client.get_profiling_link()
         self.assertEqual(link, 'https://perfht.ml/2lQhjU8')
+        self.mockaddon.reset_addon()
+
+    def test_client_wait_share(self):
+        # Opening profiling page ...
+        self.my_client.open_profiling_page()
+        # Waiting sharing finish ...
+        ret = self.my_client.wait_profiling_link_sharing_finish()
+        self.assertEqual(ret, True)
+        self.mockaddon.reset_addon()
+
+    def test_client_wait_share_faile(self):
+        # Do not open profiling page ...
+        # Waiting sharing finish ...
+        ret = self.my_client.wait_profiling_link_sharing_finish()
+        self.assertEqual(ret, False)
+        self.mockaddon.reset_addon()
 
     def tearDown(self):
         # stop Mock Add-on

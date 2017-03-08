@@ -8,6 +8,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 if __name__ == '__main__':
     # mockaddon = MockAddon()
+    my_client = None
 
     try:
         CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -36,13 +37,19 @@ if __name__ == '__main__':
 
         # Opening profiling page ...
         my_client.open_profiling_page()
-        my_client.open_profiling_page()
 
         # Getting profiling file ...
         filepath = my_client.get_profiling_file()
 
         # Getting profiling link ...
         link = my_client.get_profiling_link()
+
+        # wait for sharing finish
+        print('Wait for sharing finish ...')
+        if my_client.wait_profiling_link_sharing_finish():
+            print('Sharing finished.')
+        else:
+            print('Sharing timeout.')
 
         print('>> Profiling File: {}'.format(filepath))
         print('>> Profiling Link: {}'.format(link))

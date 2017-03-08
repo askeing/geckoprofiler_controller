@@ -118,10 +118,10 @@ def start_server():
 
 
 if __name__ == '__main__':
+    server = ioloop.IOLoop.instance()
     try:
         app.listen(8888)
         logger.info('[WebSocket] Server is listening on port 8888 ...')
-        server = ioloop.IOLoop.instance()
         server.start()
     except:
         server.close()
