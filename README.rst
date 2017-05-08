@@ -8,7 +8,7 @@ gecko-profiler-controller
     :target: https://pypi.python.org/pypi/geckoprofiler_controller 
 
 .. |AddonRelease| image:: https://img.shields.io/github/release/askeing/Gecko-Profiler-Addon.svg?style=plastic&label=Modified%20Gecko%20Profiler%20Add-on
-    :target: https://github.com/askeing/Gecko-Profiler-Addon/releases 
+    :target: hhttps://github.com/askeing/Gecko-Profiler-Addon/releases/latest 
 
 |Travis| |PyPI|
 
